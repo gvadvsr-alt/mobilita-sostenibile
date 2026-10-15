@@ -10,10 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300..700&family=Fraunces:opsz,wght@9..144,400..800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#000000; --paper:#0f1113; --surface-2:#1a1d21; --ink:#ffffff; --ink-2:#e8eaed; --muted:#9aa0a6;
-  --line:#2a2d31; --line-2:#35393e; --accent:#02BAF4; --accent-2:#40cfff; --on-accent:#00131c; --bar:#02BAF4;
-  --chip-bg:#1a1d21; --chip-border:#35393e; --badge-sec-bg:#1a1d21; --badge-sec-ink:#ffffff;
-  --up:#2EBD85; --down:#F6465D;
+  /* verde = SCELTA di identità, non un riferimento misurato: fra i siti di mobilità con più
+     visite non ce n'è uno verde (CleanTechnica bianco/blu #1967D2, Vaielettrico bianco/viola
+     #4C328A, InsideEVs blocca la lettura). Impianto: verde notte + un solo accento verde. */
+  --chrome:#0B2A1B; --chrome-ink:#EAF6EE; --chrome-muted:rgba(234,246,238,.72); --chrome-line:rgba(234,246,238,.20); --chrome-accent:#35D07F;
+  --highlight:#35D07F; --on-highlight:#06170F;
+  --bg:#0E1A14; --paper:#14241B; --surface-2:#1B2F23; --ink:#E8F2EA; --ink-2:#CFE0D4; --muted:#8FA79A;
+  --line:#22392C; --line-2:#2E4A39;
+  --accent:#35D07F; --accent-2:#7CE8A8; --on-accent:#06170F; --bar:#35D07F;
+  --chip-bg:#1B2F23; --chip-border:#2E4A39; --badge-sec-bg:#1B2F23; --badge-sec-ink:#E8F2EA;
+  --up:#6FD3A3; --down:#F6465D;
   --display:"Archivo",Arial,sans-serif; --body:"Archivo",Arial,sans-serif; --mono:"Archivo",Arial,sans-serif;
   --body-size:17px; --dek-size:16px; --h2:24px; --h2-big:48px; --h2-grid:18px; --stat:56px;
   --chip-radius:9999px; --card-radius:8px; --ctrl-radius:8px; --maxw:1280px; --scale:1;
@@ -33,19 +39,20 @@ body[data-lang="it"] [data-lang="en"]{display:none}
 body[data-lang="en"] [data-lang="it"]{display:none}
 .mono{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:22px}
+/* --chrome: superficie piena della testata/edizione/striscia (default trasparente = nessun cambiamento) */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;background:var(--chrome,transparent);color:var(--chrome-ink,var(--ink));border-bottom:1px solid var(--chrome-line,var(--line))}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;letter-spacing:-.02em;font-size:22px;color:var(--chrome-ink,var(--ink))}
 .brand .mark{width:26px;height:26px;background:var(--highlight,var(--accent));display:inline-block;clip-path:polygon(50% 0,100% 100%,0 100%)}
-.brand small{font-family:var(--mono);font-size:11.5px;font-weight:400;color:var(--muted);letter-spacing:.14em}
+.brand small{font-family:var(--mono);font-size:11.5px;font-weight:400;color:var(--chrome-muted,var(--muted));letter-spacing:.14em}
 .actions{display:flex;align-items:center;gap:10px}
-.icon{height:34px;min-width:34px;padding:0 10px;border:1px solid var(--line);display:inline-grid;place-items:center;font-family:var(--mono);font-size:12px;background:transparent;color:var(--ink);cursor:pointer;border-radius:var(--ctrl-radius);text-decoration:none}
+.icon{height:34px;min-width:34px;padding:0 10px;border:1px solid var(--chrome-line,var(--line));display:inline-grid;place-items:center;font-family:var(--mono);font-size:12px;background:transparent;color:var(--ink);cursor:pointer;border-radius:var(--ctrl-radius);text-decoration:none}
 .icon:hover{border-color:var(--accent);color:var(--accent)}
 .icon.on{background:var(--accent);color:var(--on-accent);border-color:var(--accent);font-weight:600}
 #searchbox{display:none;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-family:var(--mono);font-size:12px;padding:9px 12px;border-radius:var(--ctrl-radius);min-width:240px}
 #searchbox.show{display:block}
-.edition{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
-.edition .l{color:var(--accent);font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
-.ticker{display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--line);padding:12px 0;overflow:hidden}
+.edition{display:flex;justify-content:space-between;gap:16px;padding:10px 0;background:var(--chrome,transparent);color:var(--chrome-ink,var(--ink));border-bottom:1px solid var(--chrome-line,var(--line))}
+.edition .l{color:var(--chrome-accent,var(--accent));font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+.ticker{display:flex;align-items:center;gap:14px;background:var(--chrome,transparent);color:var(--chrome-ink,var(--ink));border-bottom:1px solid var(--chrome-line,var(--line));padding:12px 0;overflow:hidden}
 .tick-label{background:var(--highlight,var(--accent));color:var(--on-highlight,var(--on-accent));font-weight:600;font-family:var(--mono);font-size:11px;letter-spacing:.12em;padding:5px 9px;white-space:nowrap;position:relative;z-index:2;border-radius:var(--ctrl-radius)}
 .tick-wrap{flex:1;overflow:hidden;min-width:0}
 .tick-track{display:flex;gap:22px;white-space:nowrap;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;animation:slide 70s linear infinite}
@@ -121,7 +128,7 @@ html[data-theme="prisma"] .story.big .thumb:after{background:linear-gradient(180
 .modal-body p{font-size:calc(17px*var(--scale));line-height:1.55}
 .modal-body a{color:var(--accent)}
 .modal-close{float:right;font-family:var(--mono);font-size:11px;letter-spacing:.1em;border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 11px;cursor:pointer;border-radius:var(--ctrl-radius)}
-.proto{border:1px solid var(--accent);color:var(--accent);font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;padding:3px 7px;border-radius:2px}
+.proto{border:1px solid var(--chrome-accent,var(--accent));color:var(--chrome-accent,var(--accent));font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;padding:3px 7px;border-radius:2px}
 /* mobile: stessa pagina, una colonna */
 @media (max-width:1000px){
   .wrap{padding:0 16px}
@@ -440,7 +447,7 @@ html[data-theme="prisma"] .story.big .thumb:after{background:linear-gradient(180
     </aside>
   </div>
   <div class="foot">
-    <span class="mono">Prototipo non pubblicato · dati: feed Refracto Cripto Capitale (staging) · generato 15/10/2026 18:55</span>
+    <span class="mono">Prototipo non pubblicato · dati: feed Refracto Cripto Capitale (staging) · generato 15/10/2026 19:07</span>
     <span class="mono">20 item nel feed · finestra 12–15 ottobre 2026</span>
   </div>
 </div>
